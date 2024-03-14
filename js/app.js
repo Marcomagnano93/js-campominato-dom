@@ -57,16 +57,11 @@ function startGame () {
 
                         if(cellBomb.includes(cellNumber) === true){
                             console.log(`Hai perso il tuo punteggio totale è: "${ptiCounter}"`)
-                            for(let j = 0; j < cellBomb.length; j++){
-
-                                // let classes = document
+                            
                                     cell.classList.add("bg-booom");
                                     cell.classList.add("stop_click");
-
-                            }
                         }
                         else{
-
                             cell.classList.add("stop_click")
                             cell.classList.add("bg-selected") //Se vogliamo che la casella una volta ottenuto il bg non possa perderlo
                             // cell.classList.toggle("bg-selected") //se vogliamo che una volta "selezionata" la casella possiamo "deselezionarla"
@@ -76,14 +71,9 @@ function startGame () {
                             if(ptiCounter === (size - 16)){
                     
                                 console.log(`Hai vinto!!! Il tuo punteggio totale è: "${ptiCounter}"`)
-                    
                             }
-                           
-
                         }
                     })
-                    
-                    
                 }
     }
     else {
@@ -95,9 +85,13 @@ function startGame () {
 
 
 
+
+
+
+
+
+
 function divGenerator(divElement, appendElement, innerElement, sizeClass){
-
-
 
             divElement.classList.add("cell");
             divElement.classList.add(`cell-${sizeClass}`)
