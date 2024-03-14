@@ -15,6 +15,15 @@ const gameStarter = document.getElementById("starter");
 
     gameStarter.addEventListener("click", startGame);
 
+
+
+
+
+
+
+
+
+
 function startGame () {
 
         
@@ -56,4 +65,25 @@ function startGame () {
         alert("Scegli la difficoltà!")
     }
     
+}
+
+
+//CREA UNA FUNZIONE CHE GENERI 16 NUMERI (CELL) CASUALI E UNICI, COMPRESI NEL NUMERO DI CASELLE DELLA GRIGLIA
+
+function bombGenerator(maxBombNumber){
+    //stabilisci un massimo (che inseriremo) e un minimo
+    let max = maxBombNumber;
+    const min = 1;
+    //dichiara un array in cui inserire le bombe generate
+    let totalBombs = []
+    //crea un ciclo che si ripete 16 volte in cui generi un numero casuale
+    while(totalBombs.length < 16){
+        
+        let bombs = Math.floor(Math.random() * max) + min;
+    //se il numero generato è diverso da quelli generati in precedenza, fai push nell'array
+        if(totalBombs.includes(bombs) === false){
+            totalBombs.push(bombs)
+        }
+    }
+    // console.log(totalBombs)
 }
