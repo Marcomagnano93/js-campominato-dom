@@ -23,19 +23,23 @@ main {
     cursor: pointer;
 }
 
-.cell-10{
+.cell-100{
     width: calc(100% / 10);
 }
 
-.cell-9{
+.cell-81{
     width: calc(100% / 9);
 }
 
-.cell-7{
+.cell-49{
     width: calc(100% / 7);
 }
 
 .cell.bg-selected{
     background-color: rgb(0, 0, 97);
+    color: white;
+}
+.cell.bg-booom{
+    background-color: red;
     color: white;
 }

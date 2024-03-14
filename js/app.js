@@ -30,33 +30,47 @@ function startGame () {
     const difficultSelector = parseInt(document.getElementById("difficult").value);
 
     if (difficultSelector === 10 || difficultSelector === 9 || difficultSelector === 7){
+                //stabiliamo la dimensione della tabella
+                let size
+                if(difficultSelector === 10){ size = 100}
+                else if(difficultSelector === 9){size = 81}
+                else if(difficultSelector === 7){size = 49}
+                // console.log(size)
 
         const gridCells = document.querySelector(".grid-wrapper");
-
+                //resettiamo la tabella
                 gridCells.innerHTML = " ";
 
-                const cells = difficultSelector ** 2; //number
+                //generiamo le bombe da inserire nella tabella
+                let cellBomb = generateRandomBombs(size); //array di 16 numeri random
+                console.log(cellBomb)
 
-                for(let i = 0; i < cells; i++){
-
+                //generiamo la tabella
+                for(let i = 0; i < size; i++){
+                //numeriamo le caselle
                     let cellNumber = i + 1; //1-100 number
                     // console.log(cellNumber)
+
 
                     const cell = document.createElement("div");
 
                         cell.classList.add("cell");
-                        cell.classList.add(`cell-${difficultSelector}`)
+                        cell.classList.add(`cell-${size}`)
 
                         cell.innerHTML = cellNumber;
 
                     gridCells.append(cell);
 
                     cell.addEventListener("click", function(){
-
-                        cell.classList.add("bg-selected") //Se vogliamo che la casella una volta ottenuto il bg non possa perderlo
-                        // cell.classList.toggle("bg-selected") //se vogliamo che una volta "selezionata" la casella possiamo "deselezionarla"
-                        console.log(`Hai selezionato la casella numero: "${cellNumber}"`)
-
+                        
+                        if(cellBomb.includes(cellNumber) === true){
+                            cell.classList.add("bg-booom")
+                        }
+                        else{
+                            cell.classList.add("bg-selected") //Se vogliamo che la casella una volta ottenuto il bg non possa perderlo
+                            // cell.classList.toggle("bg-selected") //se vogliamo che una volta "selezionata" la casella possiamo "deselezionarla"
+                            console.log(`Hai selezionato la casella numero: "${cellNumber}"`)
+                        }
                     })
                 }
     }
@@ -64,15 +78,17 @@ function startGame () {
         // console.log("scegli la difficoltà!")
         alert("Scegli la difficoltà!")
     }
-    
 }
 
 
-//CREA UNA FUNZIONE CHE GENERI 16 NUMERI (CELL) CASUALI E UNICI, COMPRESI NEL NUMERO DI CASELLE DELLA GRIGLIA
 
-function bombGenerator(maxBombNumber){
+
+
+//CREA UNA FUNZIONE CHE GENERI 16 NUMERI (CELL) CASUALI E UNICI, COMPRESI NEL NUMERO DI CASELLE DELLA GRIGLIA
     //stabilisci un massimo (che inseriremo) e un minimo
-    let max = maxBombNumber;
+
+function generateRandomBombs(maxBombs){
+    let max = maxBombs;
     const min = 1;
     //dichiara un array in cui inserire le bombe generate
     let totalBombs = []
@@ -84,6 +100,10 @@ function bombGenerator(maxBombNumber){
         if(totalBombs.includes(bombs) === false){
             totalBombs.push(bombs)
         }
+    //quando avremo generato 16 numeri randomici estraiamo il risultato dalla funzione
+        if(totalBombs.length === 16){
+            return totalBombs
+        }
     }
-    // console.log(totalBombs)
 }
+
