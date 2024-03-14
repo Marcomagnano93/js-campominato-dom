@@ -43,3 +43,7 @@ main {
     background-color: red;
     color: white;
 }
+
+.stop_click{
+    pointer-events: none;
+}

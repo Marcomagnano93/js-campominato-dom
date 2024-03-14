@@ -40,38 +40,50 @@ function startGame () {
         const gridCells = document.querySelector(".grid-wrapper");
                 //resettiamo la tabella
                 gridCells.innerHTML = " ";
-
+                //Creiamo un contatore di punteggio
+                let ptiCounter = 0;
                 //generiamo le bombe da inserire nella tabella
                 let cellBomb = generateRandomBombs(size); //array di 16 numeri random
                 console.log(cellBomb)
-
                 //generiamo la tabella
                 for(let i = 0; i < size; i++){
                 //numeriamo le caselle
                     let cellNumber = i + 1; //1-100 number
-                    // console.log(cellNumber)
-
-
-                    const cell = document.createElement("div");
-
-                        cell.classList.add("cell");
-                        cell.classList.add(`cell-${size}`)
-
-                        cell.innerHTML = cellNumber;
-
-                    gridCells.append(cell);
-
+                //creiamo le caselle in html con le rispettive classi
+                    let cell = document.createElement("div");
+                    divGenerator(cell, gridCells, cellNumber, size)
+                //diamo alle caselle un eventListener click che dia un bg differente in base se sono bombe o caselle libere(a ogni casella togliamo il click)
                     cell.addEventListener("click", function(){
-                        
+
                         if(cellBomb.includes(cellNumber) === true){
-                            cell.classList.add("bg-booom")
+                            console.log(`Hai perso il tuo punteggio totale è: "${ptiCounter}"`)
+                            for(let j = 0; j < cellBomb.length; j++){
+
+                                // let classes = document
+                                    cell.classList.add("bg-booom");
+                                    cell.classList.add("stop_click");
+
+                            }
                         }
                         else{
+
+                            cell.classList.add("stop_click")
                             cell.classList.add("bg-selected") //Se vogliamo che la casella una volta ottenuto il bg non possa perderlo
                             // cell.classList.toggle("bg-selected") //se vogliamo che una volta "selezionata" la casella possiamo "deselezionarla"
+                            ptiCounter++
                             console.log(`Hai selezionato la casella numero: "${cellNumber}"`)
+                            console.log(`Il tuo punteggio è: "${ptiCounter}"`)
+                            if(ptiCounter === (size - 16)){
+                    
+                                console.log(`Hai vinto!!! Il tuo punteggio totale è: "${ptiCounter}"`)
+                    
+                            }
+                           
+
                         }
                     })
+                    
+                    
                 }
     }
     else {
@@ -82,6 +94,19 @@ function startGame () {
 
 
 
+
+function divGenerator(divElement, appendElement, innerElement, sizeClass){
+
+
+
+            divElement.classList.add("cell");
+            divElement.classList.add(`cell-${sizeClass}`)
+                        
+            divElement.innerHTML = innerElement;
+
+            appendElement.append(divElement);
+
+}
 
 
 //CREA UNA FUNZIONE CHE GENERI 16 NUMERI (CELL) CASUALI E UNICI, COMPRESI NEL NUMERO DI CASELLE DELLA GRIGLIA
@@ -106,4 +131,28 @@ function generateRandomBombs(maxBombs){
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
